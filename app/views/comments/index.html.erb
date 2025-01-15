@@ -1,0 +1,10 @@
+<h1>Comments</h1>
+
+<%=turbo_stream_from "comments" %>
+<div id="comments">
+  <%= render @comments %>
+</div>
+
+<div id="new_comment">
+<%=render 'comments/form', comment: Comment.new %>
+</div>
