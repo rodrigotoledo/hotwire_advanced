@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:edit, :update, :destroy, :show]
+  before_action :set_comment, only: %i[edit update destroy show]
   def index
-    @comments = Comment.all
+    @comments = Comment.order(created_at: :desc)
   end
 
   def create
@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.update('new_comment', partial: 'comments/form', locals: { comment: Comment.new })
+            turbo_stream.update("new_comment", partial: "comments/form", locals: {comment: Comment.new})
           ]
         end
         format.html { head :no_content }
@@ -19,20 +19,16 @@ class CommentsController < ApplicationController
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace('new_comment', partial: 'comments/form', locals: { comment: @comment })
+            turbo_stream.replace("new_comment", partial: "comments/form", locals: {comment: @comment})
           ]
         end
       end
     end
   end
 
-  def show
+  def show; end
 
-  end
-
-  def edit
-
-  end
+  def edit; end
 
   def destroy
     @comment.destroy
@@ -50,7 +46,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.expect(comment: [:content, :author])
+    params.expect(comment: %i[content author])
   end
 
   def set_comment

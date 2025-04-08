@@ -1,9 +1,9 @@
 <h1>Comments</h1>
 
 <%=turbo_stream_from "comments" %>
-<div id="comments">
-  <%= render @comments %>
-</div>
+<%=turbo_frame_tag "comments" do %>
+  <% render partial: 'comments/table_of_comments', locals: {comments: @comments} %>
+<% end %>
 
 <div id="new_comment">
 <%=render 'comments/form', comment: Comment.new %>
