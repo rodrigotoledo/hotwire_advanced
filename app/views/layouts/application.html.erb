@@ -24,6 +24,10 @@
   </head>
 
   <body>
+    <% if authenticated? %>
+    <h1><%= Current.user.email_address %></h1>
+    <%= button_to 'Sign out', session_path, method: :delete %>
+    <% end %>
     <%=turbo_stream_from "total_of_comments" %>
     <%=turbo_frame_tag "total_of_comments" do %>
     <%= render partial: 'comments/total_of_comments' %>

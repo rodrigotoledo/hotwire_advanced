@@ -9,6 +9,7 @@
   </div>
 <% end %>
 <%= form_with model: comment do |f| %>
-  <%= f.text_area :content, rows: 3 %>
+  <%= f.text_field :author, placeholder: 'Author' %>
+  <%= f.text_area :content, rows: 3, placeholder: 'Content' %>
   <%= f.submit "Post Comment" %>
 <% end %>
